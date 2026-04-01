@@ -6,9 +6,9 @@ export class UserManager {
   static instance: UserManager;
 
   static getInstance() {
-    if (this.instance) return this.instance;
-    this.instance = new UserManager();
-    return this.instance;
+    if (UserManager.instance) return UserManager.instance;
+    UserManager.instance = new UserManager();
+    return UserManager.instance;
   }
 
   constructor() {

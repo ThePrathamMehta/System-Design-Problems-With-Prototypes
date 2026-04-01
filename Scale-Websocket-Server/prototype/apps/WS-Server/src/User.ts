@@ -1,4 +1,6 @@
 import type WebSocket from 'ws';
+import { events } from '@repo/ws-events';
+import { ChannelManager } from './managers/ChannelManager';
 
 export class User {
   userId: string;
@@ -11,7 +13,11 @@ export class User {
   init() {
     this.socket.on('message', (message) => {
       const event = JSON.parse(message.toString());
-      
+      switch (event.type) {
+        case events.JOIN_CHANNEL:
+          const { channelId } = event.payload;
+          ChannelManager.getInstance().addUserToChannel(channelId, this);
+      }
     });
   }
 }

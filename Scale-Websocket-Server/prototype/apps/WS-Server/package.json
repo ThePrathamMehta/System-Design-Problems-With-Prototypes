@@ -12,6 +12,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@repo/ws-events" : "workspace:*",
     "@types/ws": "^8.18.1",
     "ws": "^8.20.0"
   }
