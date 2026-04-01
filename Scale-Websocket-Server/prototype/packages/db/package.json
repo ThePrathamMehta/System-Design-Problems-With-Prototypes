@@ -1,0 +1,21 @@
+{
+  "name": "@repo/db",
+  "module": "index.ts",
+  "type": "module",
+  "exports" : {
+    "." : "./src/index.ts"
+  }, 
+  "scripts": {
+    "migrate" : "bun run src/migrate.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/pg": "^8.20.0",
+    "pg": "^8.20.0"
+  }
+}
