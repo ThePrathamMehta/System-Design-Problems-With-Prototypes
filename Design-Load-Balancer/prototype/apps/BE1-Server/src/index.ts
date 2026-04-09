@@ -3,7 +3,7 @@ import express, { type Request, type Response } from "express"
 const app = express();
 
 app.get("/",(req : Request , res : Response) => {
-    res.send("Hello from backend server 1");
+    res.send("Backend 1");
 })
 
 app.listen(process.env.BE1_PORT,() => {
