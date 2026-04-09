@@ -1,105 +1,141 @@
-Design a Load Balancer
+# Design a Load Balancer
 
-<!--ts-->
-Design a Load Balancer
-Problem Statement
-Requirements
-Core Requirements
-System-Level Considerations
-Low-Level Considerations
-Deliverables
-Design Document
-Prototype
-Suggested Tech Stack
-Important Notes
-Learning Outcome
-<!--te-->
-Problem Statement
+---
 
-Build a Load Balancer that distributes incoming client requests across multiple backend servers efficiently and reliably.
+## Problem Statement
 
-The system should act as a reverse proxy, meaning clients interact only with the load balancer, and it forwards requests to backend services transparently.
+Build a **Load Balancer** that efficiently distributes incoming client requests across multiple backend servers.
 
-Your load balancer should be capable of handling high traffic, intelligently routing requests, and ensuring that no single backend server becomes a bottleneck or point of failure.
+The system should behave like a **reverse proxy**, meaning:
+- Clients only interact with the load balancer
+- The load balancer forwards requests to backend servers transparently
 
-Requirements
-Core Requirements
-Accept incoming TCP connections from clients
-Forward each request to one of the available backend servers
-Support dynamic registration and deregistration of backend servers
-Continuously check health of backend servers and avoid routing to unhealthy ones
-Implement pluggable load balancing strategies, such as:
-Round Robin
-Least Connections
-Random Selection
-Expose basic metrics like:
-Active connections
-Requests per server
-Failed requests
-Handle high concurrency (thousands to millions of connections)
-System-Level Considerations
-Ensure high availability (no single point of failure)
-Design for horizontal scalability
-Define behavior during:
-Server failures
-Sudden traffic spikes
-Optimize for cost vs performance trade-offs
-Think about how DNS or external systems will route traffic to your load balancer
-Consider how multiple load balancers could work together (optional but valuable)
-Low-Level Considerations
-Ensure thread-safe operations when handling shared state (like connection counters)
-Avoid race conditions when updating backend server status
-Minimize locking overhead to maintain high throughput
-Prevent deadlocks in concurrent environments
-Handle timeouts and retries gracefully
-Deliverables
-Design Document
+Your goal is to ensure:
+-  High performance
+-  Scalability
+-  Fault tolerance
 
-Create a detailed design document that includes:
+---
 
-System architecture and components
-Request flow (client → load balancer → backend)
-Load balancing algorithm design
-Health check mechanism
-Failure handling strategy
-Bottlenecks and trade-offs
-Scaling approach
+##  Requirements
 
-Keep the design simple, practical, and realistic. Avoid unnecessary complexity—focus on clarity and correctness.
+>  Feel free to extend these requirements based on your design decisions.
 
-Prototype
+---
 
-Build a working prototype of the load balancer with the following features:
+### 🔹 Core Requirements
 
-Accepts real TCP/HTTP requests
-Routes traffic to backend servers
-Allows:
-Adding/removing servers at runtime
-Viewing server health status
-Monitoring basic metrics
-Switching load balancing strategy dynamically
-Changes should apply without restarting the system
-Suggested Tech Stack
-Component	Options
-Language	Go, Java, C++, Node.js (with worker threads)
-Networking	Native sockets / net libraries
-Metrics	Prometheus (optional)
-Important Notes
-Be mindful that network calls are blocking by default
-Efficient concurrency handling is critical
-Focus on correctness first, then optimize for performance
-Learning Outcome
+- Accept incoming **TCP connections**
+- Forward each request to a backend server
+- Support **dynamic addition/removal** of backend servers
+- Perform **health checks** on backend servers
+- Avoid routing to unhealthy servers
+- Support multiple **load balancing strategies**:
+  - Round Robin
+  - Least Connections
+  - Random
+- Expose **metrics**:
+  - Active connections
+  - Requests per server
+  - Error rate
+- Handle **high concurrency** (thousands → millions of connections)
 
-By completing this problem, you will gain:
+---
 
-Deep understanding of how load balancers work internally
-Experience with network programming and TCP handling
-Hands-on practice with concurrency and multi-threading
-Insight into scalable system design principles
+###  System-Level Considerations
 
-If you want, I can also:
+- Ensure **high availability** (no single point of failure)
+- Support **horizontal scaling**
+- Handle:
+  - Backend server failures
+  - Traffic spikes
+- Optimize for **cost vs performance**
+- Consider how **DNS** or external systems route traffic
+- Think about multiple load balancers working together
 
-Review your load balancer code
-Add real interview-style constraints
-Or 
-convert this into a GitHub-ready README with diagrams 
+---
+
+###  Low-Level Considerations
+
+- Ensure **thread safety**
+- Prevent **race conditions**
+- Avoid **deadlocks**
+- Minimize **locking overhead**
+- Handle **timeouts and retries**
+
+---
+
+##  Deliverables
+
+---
+
+###  Design Document
+
+Create a document explaining:
+
+-  System architecture
+-  Request flow (Client → LB → Backend)
+-  Load balancing algorithm
+-  Health check mechanism
+-  Failure handling
+-  Bottlenecks & trade-offs
+-  Scaling strategy
+
+>  Keep it simple. Avoid over-engineering.
+
+---
+
+###  Prototype
+
+Build a working load balancer with:
+
+- Real request handling (TCP/HTTP)
+- Traffic routing to backend servers
+- Runtime controls:
+  - Add/remove servers
+  - View server health
+  - Monitor metrics
+  - Change strategy dynamically
+
+>  No restart should be required for changes
+
+---
+
+### 💻 Suggested Tech Stack
+
+| Component  | Options |
+|-----------|--------|
+| Language  | Go / Java / C++ / Node.js |
+| Networking | Native sockets |
+| Metrics   | Prometheus (optional) |
+
+---
+
+###  Important Notes
+
+- System calls can be **blocking**
+- Concurrency handling is **critical**
+- Focus on **correctness first**, then optimize
+
+---
+
+##  Learning Outcome
+
+By completing this, you will learn:
+
+-  How load balancers work internally
+-  Network programming basics
+-  Concurrency & multi-threading
+-  Scalable system design
+
+---
+
+## Bonus (Optional)
+
+- Add a UI dashboard for metrics
+- Implement weighted load balancing
+- Add rate limiting
+
+---
+
+*Tip: A good system design is simple, scalable, and easy to reason about.*
